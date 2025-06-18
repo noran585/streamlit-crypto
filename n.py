@@ -13,7 +13,6 @@ if "dark_mode" not in st.session_state:
 
 mode = st.radio("🌙 Theme Mode:", ["🌞 Light", "🌙 Dark"], horizontal=True)
 st.session_state.dark_mode = mode == "🌙 Dark"
-
 if st.session_state.dark_mode:
     st.markdown("""
         <style>
@@ -26,21 +25,32 @@ if st.session_state.dark_mode:
 
 # -------- HEADER TITLE --------
 st.markdown("""
-    <h1 style='text-align: center;'>From Code to Coin 💻🪙🔗</h1>
+    <div style='margin-top: -30px;'>
+        <h1 style='text-align: center;'>From Code to Coin 💻🪙🔗</h1>
+        <p style='text-align: center; color: gray; font-size: 18px;'>Smart Insights. Real Data. Smarter Crypto Decisions.</p>
+    </div>
 """, unsafe_allow_html=True)
 
 # -------- TABS --------
-tab1, tab2, tab3 = st.tabs(["Prediction and Insights", "COIN50 Constituents", "Generative AI"])
+tab1, tab2, tab3 = st.tabs(["Prediction and Insights", "COIN50 Constituents", "Agentic AI"])
 
 # -------- TAB 1: PREDICTION AND INSIGHTS --------
 with tab1:
-    st.markdown("### 🧠 Introduction")
+    st.markdown("### 🧠 Project Introduction")
     st.markdown("""
-        The COIN50 Index is a comprehensive benchmark that tracks the top 50 cryptocurrencies listed on Coinbase,
-        providing a diversified and dynamic view of the digital asset market. It uses a transparent methodology that
-        incorporates market capitalization and liquidity as core criteria while applying caps and filters to reduce
-        volatility and concentration risk. The index is rebalanced quarterly to reflect market changes, helping analysts,
-        traders, and investors to understand broader crypto trends and performance with clarity.
+This graduation project focuses on analyzing and forecasting the cryptocurrency market using the Coinbase 50 Index (COIN50), 
+which tracks the top 50 digital assets on Coinbase. The project integrates advanced data science methods—including time series 
+forecasting, machine learning, and deep learning models—to understand market trends, predict asset returns, and generate insights 
+for smarter investment decisions.
+
+Through data engineering, feature extraction, and the use of models like XGBoost, LSTM, and Transformer architectures, 
+the project aims to build accurate predictive systems that help visualize and interpret market movements. In addition to 
+technical modeling, the project explores macroeconomic influences and real-world events that impact crypto prices.
+
+By applying these techniques on the COIN50 Index, the project delivers a real-time, interactive tool that aligns with Egypt’s 
+Vision 2030 and supports the shift toward digital financial inclusion, AI innovation, and economic sustainability. This work 
+not only demonstrates the power of combining financial analysis with artificial intelligence but also builds a foundation for 
+responsible crypto investing.
     """)
 
     st.subheader("📈 Coinbase 50 Index Trend (Mock Data)")
@@ -50,12 +60,14 @@ with tab1:
     fig = px.line(df_trend, x="Date", y="Coinbase50_Index", title="Coinbase 50 Index Trend", markers=True)
     st.plotly_chart(fig, use_container_width=True)
 
-    st.markdown("### 🔍 For more information")
-    st.markdown("🔗 [Visit the Coinbase Index Page](https://www.coinbase.com/prime/indexes)")
-
-# -------- TAB 2: COIN50 Constituents (Bar Chart + Table) --------
+# -------- TAB 2: COIN50 Constituents --------
 with tab2:
-    st.subheader("📊 Full COIN50 Components & Weights")
+    st.subheader("📘 Overview of the COIN50 Index")
+    st.markdown("""
+The Coinbase 50 Index (COIN50) represents the top 50 cryptocurrencies traded on the Coinbase exchange.
+It is weighted by market capitalization and liquidity, rebalanced quarterly to reflect evolving market dynamics.
+COIN50 provides investors and analysts a clear and concise overview of the most influential crypto assets in the ecosystem.
+    """)
 
     coin_data = {
         "Component": [
@@ -73,32 +85,26 @@ with tab2:
             0.05, 0.05, 0.05, 0.05, 0.04, 0.04, 0.04, 0.03, 0.03, 0.03, 0.03, 0.02, 0.02, 0.02, 0.01, 0.01
         ]
     }
-
     df_constituents = pd.DataFrame(coin_data)
-
-    # Bar Chart (Top 10 Only) with neutral color
     top10 = df_constituents.sort_values(by="Weight", ascending=False).head(10)
-    fig_weights = px.bar(
-        top10,
-        x="Component",
-        y="Weight",
-        title="Top 10 COIN50 Weights",
-        labels={"Component": "Cryptocurrency", "Weight": "Weight (%)"},
-    )
-    fig_weights.update_traces(marker_color='blue')  # neutral color
-    fig_weights.update_layout(yaxis=dict(title="Weight (%)"), xaxis=dict(title=""))
 
+    fig_weights = px.bar(
+        top10, x="Component", y="Weight", title="Top 10 COIN50 Constituents",
+        labels={"Component": "Cryptocurrency", "Weight": "Weight (%)"}
+    )
+    fig_weights.update_traces(marker_color='gray')
+    fig_weights.update_layout(yaxis=dict(title="Weight (%)"), xaxis=dict(title=""))
     st.plotly_chart(fig_weights, use_container_width=True)
 
-    # Full Table
     st.markdown("### 📋 Full COIN50 Table")
     st.dataframe(df_constituents, use_container_width=True)
 
+    st.markdown("---")
+    st.markdown("🔗 [Visit the Official Coinbase Index Page](https://www.coinbase.com/prime/indexes)")
 
-# -------- TAB 3: GENERATIVE AI --------
+# -------- TAB 3: AGENTIC AI --------
 with tab3:
-    st.subheader("🤖 Generative AI-Powered Crypto Assistant")
-
+    st.subheader("🤖 Agentic AI-Powered Crypto Assistant")
     API_KEY = "AIzaSyA2R5r3D0CkyWQd3nf3FKkAVeDAFswJzEM"  # Replace with your actual API key
     genai.configure(api_key=API_KEY)
     model = genai.GenerativeModel(model_name="gemini-1.5-flash")
