@@ -7,12 +7,16 @@ import google.generativeai as genai
 # -------- PAGE CONFIG --------
 st.set_page_config(page_title="COIN50 Index", layout="wide")
 
-# -------- THEME SWITCH --------
-if "dark_mode" not in st.session_state:
-    st.session_state.dark_mode = False
+# -------- THEME SWITCH ON FAR LEFT + TITLE --------
+top_col1, top_col2, top_col3 = st.columns([1, 8, 1])  # Left, Center, Right columns
 
-mode = st.radio("🌙 Theme Mode:", ["🌞 Light", "🌙 Dark"], horizontal=True)
+with top_col1:
+    mode = st.radio("🌙", ["🌞 Light", "🌙 Dark"], label_visibility="collapsed")
+
+# Save mode state
 st.session_state.dark_mode = mode == "🌙 Dark"
+
+# Apply dark theme
 if st.session_state.dark_mode:
     st.markdown("""
         <style>
@@ -23,13 +27,16 @@ if st.session_state.dark_mode:
         </style>
     """, unsafe_allow_html=True)
 
-# -------- HEADER TITLE --------
-st.markdown("""
-    <div style='margin-top: -30px;'>
-        <h1 style='text-align: center;'>From Code to Coin 💻🪙🔗</h1>
-        <p style='text-align: center; color: gray; font-size: 18px;'>Smart Insights. Real Data. Smarter Crypto Decisions.</p>
-    </div>
-""", unsafe_allow_html=True)
+# Centered title
+with top_col2:
+    st.markdown("""
+        <div style='margin-top: -50px;'>
+            <h1 style='text-align: center;'>From Code to Coin 💻🪙🔗</h1>
+            <p style='text-align: center; color: gray; font-size: 18px;'>Smart Insights. Real Data. Smarter Crypto Decisions.</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+
 
 # -------- TABS --------
 tab1, tab2, tab3 = st.tabs(["Prediction and Insights", "COIN50 Constituents", "Agentic AI"])
