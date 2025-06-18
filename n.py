@@ -27,14 +27,20 @@ if st.session_state.dark_mode:
         </style>
     """, unsafe_allow_html=True)
 
-# Centered title
 with top_col2:
     st.markdown("""
         <div style='margin-top: -50px;'>
             <h1 style='text-align: center;'>From Code to Coin 💻🪙🔗</h1>
-            <p style='text-align: center; color: gray; font-size: 18px;'>Smart Insights. Real Data. Smarter Crypto Decisions.</p>
+            <p style='text-align: center; color: gray; font-size: 18px;'>
+                Smart Insights. Real Data. Smarter Crypto Decisions.
+            </p>
+            <p style='text-align: center; color: black; font-size: 15.5px; margin-top: -5px;'>
+                👩‍💻 Created with passion by <strong>Mariam Abdelhamid</strong>, <strong>Nouran Amr</strong>, <strong>Berbara Romany</strong>, and <strong>Reem Ibrahim</strong>
+            </p>
         </div>
     """, unsafe_allow_html=True)
+
+
 
 
 
