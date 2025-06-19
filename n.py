@@ -105,7 +105,7 @@ COIN50 provides investors and analysts a clear and concise overview of the most 
         top10, x="Component", y="Weight", title="Top 10 COIN50 Constituents",
         labels={"Component": "Cryptocurrency", "Weight": "Weight (%)"}
     )
-    fig_weights.update_traces(marker_color='gray')
+    fig_weights.update_traces(marker_color='blue')
     fig_weights.update_layout(yaxis=dict(title="Weight (%)"), xaxis=dict(title=""))
     st.plotly_chart(fig_weights, use_container_width=True)
 
